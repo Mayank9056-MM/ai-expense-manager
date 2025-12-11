@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { CATEGORIES } from "../constants";
 
-const ReceiptSchema = new mongoose.Schema(
+const receiptSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -61,16 +61,17 @@ const ReceiptSchema = new mongoose.Schema(
       select: false,
     },
     expenseId: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: "Expense",
-  required: false,
-}
-
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Expense",
+      required: false,
+    },
   },
   { timestamps: true }
 );
 
 // Indexes
-ReceiptSchema.index({ user: 1, date: -1 });
+receiptSchema.index({ user: 1, date: -1 });
 
-export default mongoose.model("Receipt", ReceiptSchema);
+const Receipt = mongoose.model("Receipt", receiptSchema);
+
+export default Receipt;
