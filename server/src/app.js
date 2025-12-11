@@ -93,9 +93,11 @@ app.use(
 
 // import routes
 import userRouter from "./routes/user.routes.js";
+import expenseRouter from "./routes/expense.routes.js";
 
 // routes
-app.use("/api/v1", userRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/expense", expenseRouter);
 
 // It should be always at bottom
 // 404 handler

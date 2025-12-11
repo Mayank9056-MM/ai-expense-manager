@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { CATEGORIES } from "../constants";
 
-const ExpenseSchema = new mongoose.Schema(
+const expenseSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -61,9 +61,11 @@ const ExpenseSchema = new mongoose.Schema(
 );
 
 // Index for faster analytics
-ExpenseSchema.index({ user: 1, date: -1 });
-ExpenseSchema.index({ user: 1, category: 1 });
-ExpenseSchema.index({ date: -1 });
-ExpenseSchema.index({ amount: -1 });
+expenseSchema.index({ user: 1, date: -1 });
+expenseSchema.index({ user: 1, category: 1 });
+expenseSchema.index({ date: -1 });
+expenseSchema.index({ amount: -1 });
 
-export default mongoose.model("Expense", ExpenseSchema);
+const Expense = mongoose.model("Expense", expenseSchema);
+
+export default Expense;
