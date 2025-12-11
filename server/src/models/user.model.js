@@ -62,7 +62,6 @@ const userSchema = new mongoose.Schema(
 UserSchema.index({ email: 1 });
 UserSchema.index({ isActive: 1 });
 
-
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 

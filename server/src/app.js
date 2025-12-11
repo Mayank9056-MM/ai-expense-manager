@@ -92,9 +92,10 @@ app.use(
 );
 
 // import routes
-
+import userRouter from "./routes/user.routes.js";
 
 // routes
+app.use("/api/v1", userRouter);
 
 // It should be always at bottom
 // 404 handler
