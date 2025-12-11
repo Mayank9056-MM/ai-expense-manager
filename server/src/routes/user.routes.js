@@ -5,9 +5,9 @@ import {
   logoutUser,
   refreshAccessToken,
   registerUser,
-} from "../controllers/user.controllers";
-import { upload } from "../middleware/multer.middleware";
-import { verifyAuth } from "../middleware/verifyAuth";
+} from "../controllers/user.controllers.js";
+import { upload } from "../middleware/multer.middleware.js";
+import { verifyAuth } from "../middleware/verifyAuth.js";
 
 const userRouter = express.Router();
 

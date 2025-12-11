@@ -59,8 +59,8 @@ const userSchema = new mongoose.Schema(
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-UserSchema.index({ email: 1 });
-UserSchema.index({ isActive: 1 });
+userSchema.index({ email: 1 });
+userSchema.index({ isActive: 1 });
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
@@ -110,4 +110,6 @@ userSchema.methods.updateLastActive = function () {
   return this.save({ validateBeforeSave: false });
 };
 
-export default mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+export default User;
