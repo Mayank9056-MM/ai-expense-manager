@@ -94,10 +94,12 @@ app.use(
 // import routes
 import userRouter from "./routes/user.routes.js";
 import expenseRouter from "./routes/expense.routes.js";
+import receiptRouter from "./routes/receipt.routes.js";
 
 // routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/expense", expenseRouter);
+app.use("/api/v1/receipt", receiptRouter);
 
 // It should be always at bottom
 // 404 handler

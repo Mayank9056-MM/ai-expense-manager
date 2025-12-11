@@ -1,0 +1,25 @@
+name: receipt-parser
+description: Extract merchant, total, items, and date from receipt images.
+inputs:
+  - name: image
+    type: string
+    description: URL of receipt image
+steps:
+  - type: llm
+    name: parseReceipt
+    model: gpt-4.1
+    prompt: |
+      Extract the following from the receipt image:
+      - merchant
+      - total amount
+      - date
+      - items (name, price)
+      - category guess
+      INPUT IMAGE URL: {{image}}
+outputs:
+  - merchant: "{{parseReceipt.output.merchant}}"
+  - totalAmount: "{{parseReceipt.output.totalAmount}}"
+  - date: "{{parseReceipt.output.date}}"
+  - items: "{{parseReceipt.output.items}}"
+  - category: "{{parseReceipt.output.category}}"
+  - rawText: "{{parseReceipt.output.rawText}}"
