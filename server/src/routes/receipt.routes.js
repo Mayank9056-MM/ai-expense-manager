@@ -1,7 +1,7 @@
 import express from "express"
-import { verifyAuth } from "../middleware/verifyAuth"
-import { upload } from "../middleware/multer.middleware"
-import { getReceipt, uploadRecipt } from "../controllers/receipt.controllers"
+import { verifyAuth } from "../middleware/verifyAuth.js"
+import { upload } from "../middleware/multer.middleware.js"
+import { getReceipt, uploadRecipt } from "../controllers/receipt.controllers.js"
 
 const receiptRouter = express.Router()
 

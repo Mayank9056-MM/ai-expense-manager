@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import Receipt from "../models/receipt.model";
-import { runClineReceiptAgent } from "../services/cline.service";
+import Receipt from "../models/receipt.model.js";
+import { runClineReceiptAgent } from "../services/cline.service.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import {
@@ -8,7 +8,7 @@ import {
   deleteFromCloudinary,
 } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import Expense from "../models/expense.model";
+import Expense from "../models/expense.model.js";
 
 const uploadRecipt = asyncHandler(async (req, res) => {
   const filePath = req.file?.receipt;

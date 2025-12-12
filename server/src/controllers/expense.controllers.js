@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
-import Expense from "../models/expense.model";
-import { ApiResponse } from "../utils/ApiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
-import { ApiError } from "../utils/ApiError";
-import { CATEGORIES } from "../constants";
+import Expense from "../models/expense.model.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiError } from "../utils/ApiError.js";
+import { CATEGORIES } from "../constants.js";
 
 // helper functions
 const isValidDate = (d) => d instanceof Date && !isNaN(d.getTime());
