@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import Expense from "../models/expense.models.js";
-import { askOpenAI } from "../services/openai.service.js";
+import { askOpenAI, summarizeExpenses } from "../services/openai.service.js";
 
 export const chatWithAI = asyncHandler(async (req, res) => {
   const { prompt } = req.body;
@@ -20,7 +20,15 @@ export const chatWithAI = asyncHandler(async (req, res) => {
     throw new ApiError(500, "Something went wrong while fetching expenses");
   }
 
-  const aiResponse = await askOpenAI(prompt, expenses);
+  const messages = [
+    { role: "system", content: "You are a helpful finance assistant." },
+    {
+      role: "user",
+      content: `User prompt: ${prompt}\nContext: ${JSON.stringify(expenses.slice(-50))}`,
+    },
+  ];
+
+  const aiResponse = await askOpenAI(messages, { useCache: false });
 
   if (!aiResponse) {
     throw new ApiError(
