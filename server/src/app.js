@@ -95,11 +95,15 @@ app.use(
 import userRouter from "./routes/user.routes.js";
 import expenseRouter from "./routes/expense.routes.js";
 import receiptRouter from "./routes/receipt.routes.js";
+import chatRouter from "./routes/chat.routes.js";
+import insightRouter from "./routes/insight.routes.js";
 
 // routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/expense", expenseRouter);
 app.use("/api/v1/receipt", receiptRouter);
+app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/insight", insightRouter);
 
 // It should be always at bottom
 // 404 handler
