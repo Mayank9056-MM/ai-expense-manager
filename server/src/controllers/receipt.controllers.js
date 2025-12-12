@@ -17,7 +17,7 @@ const uploadRecipt = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Receipt is required");
   }
 
-  const uploaded = null;
+  let uploaded = null;
 
   // upload on cloudinary
   try {
@@ -26,7 +26,8 @@ const uploadRecipt = asyncHandler(async (req, res) => {
       throw new ApiError(500, "Something went wrong while uploading receipt");
     }
   } catch (error) {
-    console.log(error);
+    console.log("Cloudinary upload failed:", error);
+    throw new ApiError(500, "Failed to upload receipt to Cloudinary");
   }
 
   // call cline agent
