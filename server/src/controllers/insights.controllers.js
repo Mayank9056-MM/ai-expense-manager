@@ -1,7 +1,7 @@
-import Expense from "../models/expense.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import mongoose from "mongoose";
+import Expense from "../models/expense.model.js";
 
 export const getInsights = asyncHandler(async (req, res) => {
   const userId = new mongoose.Types.ObjectId(req.user._id);

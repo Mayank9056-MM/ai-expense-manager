@@ -39,7 +39,7 @@ async function retryWithBackoff(fn, retries = MAX_RETRIES) {
 
 // main
 
-export async function askOpenAI(promptOrMessages, options = {}) {
+async function askOpenAI(promptOrMessages, options = {}) {
   const {
     model = DEFAULT_MODEL,
     max_tokens = 800,
@@ -95,7 +95,7 @@ export async function askOpenAI(promptOrMessages, options = {}) {
   return retryWithBackoff(call);
 }
 
-export async function extractStructuredFromText(
+async function extractStructuredFromText(
   text,
   schemaExample,
   opts = {}
@@ -133,7 +133,7 @@ Return valid JSON that matches the schema. For dates use ISO format (YYYY-MM-DD)
   }
 }
 
-export async function summarizeExpenses(expenses = [], opts = {}) {
+async function summarizeExpenses(expenses = [], opts = {}) {
   const sample = (expenses || []).slice(-200).map((e) => ({
     title: e.title,
     amount: Number(e.amount) || 0,
@@ -184,8 +184,4 @@ Return JSON like:
   }
 }
 
-export {
-  askOpenAI,
-  extractStructuredFromText,
-  summarizeExpenses,
-};
+export { askOpenAI, extractStructuredFromText, summarizeExpenses };
