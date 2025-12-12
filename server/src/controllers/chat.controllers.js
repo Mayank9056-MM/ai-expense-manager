@@ -1,8 +1,8 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
-import Expense from "../models/expense.models.js";
 import { askOpenAI, summarizeExpenses } from "../services/openai.service.js";
+import Expense from "../models/expense.model.js";
 
 export const chatWithAI = asyncHandler(async (req, res) => {
   const { prompt } = req.body;
