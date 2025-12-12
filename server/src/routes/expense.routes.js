@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyAuth } from "../middleware/verifyAuth";
+import { verifyAuth } from "../middleware/verifyAuth.js";
 import {
   addExpense,
   categoryBreakdown,
@@ -7,7 +7,7 @@ import {
   getExpenses,
   getMonthlySummmary,
   updateExpense,
-} from "../controllers/expense.controllers";
+} from "../controllers/expense.controllers.js";
 
 const expenseRouter = express.Router();
 

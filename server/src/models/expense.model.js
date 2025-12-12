@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { CATEGORIES } from "../constants";
+import { CATEGORIES } from "../constants.js";
 
 const expenseSchema = new mongoose.Schema(
   {
