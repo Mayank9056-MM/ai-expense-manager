@@ -10,7 +10,7 @@ const isValidDate = (d) => d instanceof Date && !isNaN(d.getTime());
 
 // main functions
 
-const addExpense = asyncHandler(async () => {
+const addExpense = asyncHandler(async (req,res) => {
   const { title, amount, category, date, notes } = req.body;
 
   // validations
@@ -76,7 +76,7 @@ const updateExpense = asyncHandler(async (req, res) => {
     }
   }
 
-  const parsedDate = null;
+  let parsedDate = null;
 
   if (date) {
     parsedDate = date ? new Date(date) : new Date();

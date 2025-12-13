@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import Receipt from "../models/receipt.model.js";
-import { runClineReceiptAgent } from "../services/cline.service.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import {
@@ -9,9 +8,10 @@ import {
 } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import Expense from "../models/expense.model.js";
+import { parseReceiptFromImage } from "../services/openai.service.js";
 
-const uploadRecipt = asyncHandler(async (req, res) => {
-  const filePath = req.file?.receipt;
+const uploadReceipt = asyncHandler(async (req, res) => {
+  const filePath = req.file?.path;
 
   if (!filePath) {
     throw new ApiError(400, "Receipt is required");
@@ -31,7 +31,7 @@ const uploadRecipt = asyncHandler(async (req, res) => {
   }
 
   // call cline agent
-  const parsed = await runClineReceiptAgent(uploaded.url);
+  const parsed = await parseReceiptFromImage(uploaded.url);
 
   // Build Receipt Entry
   const receipt = await Receipt.create({
@@ -91,4 +91,4 @@ export const getReceipt = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, receipt, "Receipt fetched successfully"));
 });
 
-export { uploadRecipt };
+export { uploadReceipt };
