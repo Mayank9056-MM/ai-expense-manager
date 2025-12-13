@@ -197,6 +197,8 @@ const getMonthlySummmary = asyncHandler(async (req, res) => {
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
   const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
+  console.log("monthStart", monthStart, "monthEnd", monthEnd);
+
   const summary = await Expense.aggregate([
     {
       $match: {

@@ -46,19 +46,23 @@ const registerUser = asyncHandler(async (req, res) => {
       throw new ApiError(400, "All fields are required");
     }
 
-    const existedUser = await User.find({
+    const existedUser = await User.findOne({
       email,
     });
+
+    console.log(existedUser, "existed User");
 
     if (existedUser) {
       throw new ApiError(409, "User with email or name already exists");
     }
 
-    const avatarLocalPath = req.files?.avatar[0]?.path; // from multer the name avatar from route
+    const avatarLocalPath = req?.file?.path || null; // from multer the name avatar from route
 
     if (avatarLocalPath) {
       try {
+        console.log("avatarLocalPath", avatarLocalPath);
         avatar = await uploadOnCloudinary(avatarLocalPath);
+
         console.log("Upload on cloudinary avatar", avatar);
       } catch (error) {
         console.log("Error uploading avatar", error);
@@ -68,7 +72,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const user = await User.create({
       name: name.toLowerCase(),
-      avatar: avatar.url || "",
+      avatar: avatar?.secure_url || "",
       email,
       password,
     });
@@ -105,13 +109,14 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new ApiError(402, "email required");
   }
 
-  const user = await User.find({
+  const user = await User.findOne({
     email,
   });
 
   if (!user) {
     throw new ApiError(400, "user not found please register");
   }
+
 
   // validate password
   const isPasswordValid = await user.isPasswordCorrect(password);
@@ -226,4 +231,10 @@ const getCurrentUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, req.user, "Current user details"));
 });
 
-export { registerUser, loginUser, refreshAccessToken, logoutUser,getCurrentUser };
+export {
+  registerUser,
+  loginUser,
+  refreshAccessToken,
+  logoutUser,
+  getCurrentUser,
+};

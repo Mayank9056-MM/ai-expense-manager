@@ -8,6 +8,7 @@ const cache = new NodeCache({ stdTTL: 60 * 5 }); // 5 min
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_KEY,
+  baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
 
 // helper function
@@ -95,11 +96,7 @@ async function askOpenAI(promptOrMessages, options = {}) {
   return retryWithBackoff(call);
 }
 
-async function extractStructuredFromText(
-  text,
-  schemaExample,
-  opts = {}
-) {
+async function extractStructuredFromText(text, schemaExample, opts = {}) {
   const schemaJSON = JSON.stringify(schemaExample, null, 2);
 
   const system =
@@ -183,35 +180,5 @@ Return JSON like:
     return { raw, parseError: err.message };
   }
 }
-
-export async function parseReceiptFromImage(imageUrl) {
-  const messages = [
-    {
-      role: "system",
-      content:
-        "You extract structured expense data from receipt images and return JSON only.",
-    },
-    {
-      role: "user",
-      content: [
-        { type: "text", text: "Extract merchant, totalAmount, date, items, category." },
-        { type: "image_url", image_url: imageUrl },
-      ],
-    },
-  ];
-
-  const raw = await askOpenAI(messages, {
-    temperature: 0,
-    max_tokens: 600,
-  });
-
-  const match = raw.match(/\{[\s\S]*\}/);
-  if (!match) {
-    throw new Error("Failed to parse receipt JSON");
-  }
-
-  return JSON.parse(match[0]);
-}
-
 
 export { askOpenAI, extractStructuredFromText, summarizeExpenses };
