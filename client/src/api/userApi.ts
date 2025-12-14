@@ -27,7 +27,7 @@ export const registerUserApi = async (data: RegisterData): Promise<any> => {
       },
     });
     console.log(res, "register user api data");
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -38,7 +38,7 @@ export const loginUserApi = async (data: LoginUserData): Promise<any> => {
   try {
     const res = await axiosInstance.post("/user/login", data);
     console.log(res, "login user api data");
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -49,7 +49,7 @@ export const logoutUserApi = async () => {
   try {
     const res = await axiosInstance.post("/user/logout");
     console.log(res, "logout user api data");
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -60,7 +60,7 @@ export const getUserApi = async () => {
   try {
     const res = await axiosInstance.get("/user");
     console.log(res, "get user api data");
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.log(error);
     throw error;
@@ -69,9 +69,9 @@ export const getUserApi = async () => {
 
 export const refreshAccessTokenApi = async () => {
   try {
-    const res = await axiosInstance.post("/users/refresh-token");
+    const res = await axiosInstance.post("/user/");
     console.log("res from refresh access token user api => ", res);
-    return res.data;
+    return res.data.data;
   } catch (error: any) {
     console.log("error in refresh access user api", error);
     throw error.message;
