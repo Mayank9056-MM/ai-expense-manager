@@ -1,0 +1,35 @@
+<svg
+  width="128"
+  height="128"
+  viewBox="0 0 128 128"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background -->
+  <rect width="128" height="128" rx="28" fill="#8B3DFF"/>
+
+  <!-- Money bag body -->
+  <path
+    d="M40 56C40 48 48 44 64 44C80 44 88 48 88 56C88 60 84 64 84 68C84 84 76 96 64 96C52 96 44 84 44 68C44 64 40 60 40 56Z"
+    fill="#FFC83D"
+  />
+
+  <!-- Bag neck -->
+  <path
+    d="M52 44H76C76 48 70 52 64 52C58 52 52 48 52 44Z"
+    fill="#F4B400"
+  />
+
+  <!-- Dollar sign -->
+  <text
+    x="64"
+    y="82"
+    text-anchor="middle"
+    font-size="36"
+    font-weight="700"
+    fill="#7A4A00"
+    font-family="Arial, Helvetica, sans-serif"
+  >
+    $
+  </text>
+</svg>
